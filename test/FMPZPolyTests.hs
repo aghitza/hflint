@@ -5,26 +5,17 @@
 module FMPZPolyTests
 where
 
-import Control.Arrow ( (***) )
-import Data.Composition ( (.:) )
 import Data.Function ( on )
-import Data.List ( delete
-                 , intercalate
-                 , dropWhileEnd
-                 )
-import Data.List.Split ( splitOn )
 import qualified Data.Vector as V
 
 import Test.Tasty ( testGroup
                   , TestTree
                   )
 
-import qualified Test.Tasty.SmallCheck as SC
 import qualified Test.Tasty.QuickCheck as QC
 import qualified Test.Tasty.HUnit as HU
 import Test.Tasty.HUnit ( (@?=) )
 
-import HFlint.FMPZ
 import HFlint.FMPZPoly
 
 import qualified TestHFlint.Utils as U
@@ -42,11 +33,6 @@ equal2        = U.equal2 (fromIntegers :: [Integer] -> FMPZPoly) toIntegers
 intertwining  = U.intertwining (fromIntegers :: [Integer] -> FMPZPoly) toIntegers
 intertwining2 = U.intertwining2 (fromIntegers :: [Integer] -> FMPZPoly) toIntegers
 
-
-testProperty s p = testGroup ("(QuickCheck & SmallCheck)")
-  [ QC.testProperty s p
-  , SC.testProperty s p
-  ]
 
 properties :: TestTree
 properties = testGroup "Properties"

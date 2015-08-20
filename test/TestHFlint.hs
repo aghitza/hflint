@@ -12,6 +12,7 @@ import FMPZPolyTests ( fmpzPolyTestGroup )
 import Primes ( primesTestGroup )
 
 
+main :: IO ()
 main = defaultMain $ testGroup "HFlint Tests"
        [ fmpzTestGroup
        , fmpqTestGroup

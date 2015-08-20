@@ -12,7 +12,6 @@ import Test.Tasty ( testGroup
                   , TestTree
                   )
 
-import qualified Test.Tasty.SmallCheck as SC
 import qualified Test.Tasty.QuickCheck as QC
 import qualified Test.Tasty.HUnit as HU
 import Test.Tasty.HUnit ( (@?=) )
@@ -36,11 +35,6 @@ intertwining  = U.intertwining (fromRationals :: [Rational] -> FMPQPoly) toRatio
 intertwining2 = U.intertwining2 (fromRationals :: [Rational] -> FMPQPoly) toRationals
 
 
-testProperty s p = testGroup ("(QuickCheck & SmallCheck)")
-  [ QC.testProperty s p
-  , SC.testProperty s p
-  ]
-
 properties :: TestTree
 properties = testGroup "Properties"
   [ -- Eq instance
@@ -53,17 +47,17 @@ properties = testGroup "Properties"
     (==)
 
     -- conversion from and to FMPZPoly
-  , testProperty "fromFMPZPoly" $ U.equal
+  , U.testProperty "fromFMPZPoly" $ U.equal
       (id :: [Integer] -> [Integer]) undefined
       (fromRationals . map fromInteger)
       (fromFMPZPoly . fromIntegers)
---  , testProperty "toFMPZPoly" $ U.equal
+--  , U.testProperty "toFMPZPoly" $ U.equal
 --      fromRationals undefined
 --      id
 --      (uncurry (.*) . ((flip fromFMPZs 1)***fromFMPZPoly) . toFMPZPoly)
 
     -- factorization
---  , testProperty "factor" $ U.equal
+--  , U.testProperty "factor" $ U.equal
 --      fromRationals undefined
 --      id
 --      (unfactor . factor)

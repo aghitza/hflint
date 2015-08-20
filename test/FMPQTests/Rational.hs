@@ -10,10 +10,8 @@ import Data.Ratio ( (%) )
 import qualified Math.Structure as M
 
 import Test.Tasty ( testGroup , TestTree )
-import qualified Test.Tasty.SmallCheck as SC
-import qualified Test.Tasty.QuickCheck as QC
 import qualified Test.Tasty.HUnit as HU
-import Test.Tasty.HUnit as HU ( (@?=), (@=?) )
+import Test.Tasty.HUnit as HU ( (@=?) )
 
 import HFlint.FMPQ
 import FMPQTests.Utils
