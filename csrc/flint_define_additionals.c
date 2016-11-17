@@ -35,4 +35,3 @@ nmod_n_additional(
 {
   return mod->n;
 }
-

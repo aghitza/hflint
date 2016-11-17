@@ -35,7 +35,7 @@ library
   default-language: Haskell2010
   build-depends:
       base > 3 && < 5
-    , algebra-structures
+    , algebraic-structures
     , composition
     , containers
     , deepseq
@@ -62,11 +62,15 @@ library
     HFlint.NMod
     HFlint.Primes
 
+    HFlint.FMPZ.FFI
+    HFlint.FMPQ.FFI
+
+    HFlint.Internal
+
   other-modules:
     HFlint.FMPQ.Algebra
     HFlint.FMPQ.Arithmetic
     HFlint.FMPQ.Base
-    HFlint.FMPQ.FFI
     HFlint.FMPQ.Reduction
     HFlint.FMPQ.Tasty.QuickCheck
     HFlint.FMPQ.Tasty.SmallCheck
@@ -81,7 +85,6 @@ library
     HFlint.FMPZ.Algebra
     HFlint.FMPZ.Arithmetic
     HFlint.FMPZ.Base
-    HFlint.FMPZ.FFI
     HFlint.FMPZ.Limbs
     HFlint.FMPZ.Reduction
     HFlint.FMPZ.Reduction.FMPZCRT
@@ -121,18 +124,16 @@ library
   GHC-options:
     -Wall
     -fno-warn-orphans
-    -static
     -fsimpl-tick-factor=500
+    -threaded
   GHC-prof-options:
     -prof -auto
   cpp-options:
-    -fpic
-    -static
+    -fPIC
   build-tools:         hsc2hs
   hs-source-dirs:      src
 
   include-dirs:
-    /usr/include
     csrc
   includes:
     flint/flint.h
@@ -161,7 +162,7 @@ library
 test-suite test-hflint
   build-depends:
     base,
-    algebra-structures,
+    algebraic-structures,
     hflint == 0.0.1,
     composition,
     split,
